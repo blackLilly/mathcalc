@@ -58,7 +58,7 @@ export default function Flamescalc() {
     const [snakMessage, setSnakMessage] = React.useState(null);
 
     const onCalculateClick = (e) => {
-
+        pop(e);
         if (state.nameOne === "") {
             setSnakOpen(true);
             setSnakMessage("Enter first name");
@@ -168,7 +168,71 @@ export default function Flamescalc() {
             ...state,
             showResult: false,
             [e.target.id]: e.target.value
-        })
+        });
+        pop(e);
+    }
+
+
+    React.useEffect((e) => {
+
+    }, []);
+
+
+    function pop(e) {
+        // Loop to generate 30 particles at once
+
+        for (let i = 0; i < 30; ++i) {
+            createParticle(Math.random() * 500, Math.random() * 500, i);
+        }
+    }
+    function createParticle(x, y, row) {
+        // Create a custom particle element
+        const particle = document.createElement('particle');
+        // Append the element into the body
+        document.body.appendChild(particle);
+
+        // [...]
+        // Calculate a random size from 5px to 55px
+        const size = Math.floor(Math.random() * 50 + 5);
+        // Apply the size on each particle
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        // Generate a random color in a blue/purple palette
+        if (row % 2 === 0) {
+            particle.style.background = '#f44336';
+        }
+        else {
+            particle.style.background = `hsl(${Math.random() * 90 + 180}, 95%, 52%)`;
+        }
+        // [...]
+        // Generate a random x & y destination within a distance of 75px from the mouse
+        const destinationX = x + (Math.random() - 0.5) * 2 * 705;
+        const destinationY = y + (Math.random() - 0.5) * 2 * 750;
+
+        // Store the animation in a variable because we will need it later
+        const animation = particle.animate([
+            {
+                // Set the origin position of the particle
+                // We offset the particle with half its size to center it around the mouse
+                transform: `translate(${x - (size / 2)}px, ${y - (size / 2)}px)`,
+                opacity: 1
+            },
+            {
+                // We define the final coordinates as the second keyframe
+                transform: `translate(${destinationX}px, ${destinationY}px)`,
+                opacity: 0
+            }
+        ], {
+            // Set a random duration from 500 to 1500ms
+            duration: 500 + Math.random() * 1000,
+            easing: 'cubic-bezier(0, .9, .57, 1)',
+            // Delay every particle with a random value from 0ms to 200ms
+            delay: Math.random() * 200
+        });
+
+        animation.onfinish = () => {
+            particle.remove();
+        };
     }
 
     return (
@@ -178,6 +242,7 @@ export default function Flamescalc() {
                 msg={snakMessage}
                 handleClose={handleClose}
             />
+            <particle ></particle>
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>Online flames calculator - Mathcalc</title>
@@ -203,7 +268,7 @@ export default function Flamescalc() {
                                 Flames Calculator</h2>
                             <p>
                                 This flames calculator assesses and predicts the outcome of a relationship based on an algorithm of two given names.
-                                     You can find more in depth information on this subject below the form.  </p>
+                                You can find more in depth information on this subject below the form.</p>
                             <br />
                             <p className="title is-5">Please enter the names you are interested in !</p>
                             <Grid justify="left">
@@ -219,8 +284,8 @@ export default function Flamescalc() {
                                     <div className={classes.resultDiv + " box"}>
                                         <h3 className="title" style={{ color: '#fff' }}>
                                             The relationship between {state.nameOne} and {state.nametwo + " "}
-                                        will end in
-                                        <br />
+                                            will end in
+                                            <br />
                                             <strong style={{ fontSize: '3rem', fontFamily: 'fantasy' }}>{" " + state.relationship}!
                                             </strong>
                                         </h3>
@@ -242,38 +307,33 @@ export default function Flamescalc() {
                             <h2 className="title is-5">How does this flames calculator work?</h2>
                             <p data-v-14591542>
                                 It is always hard to define the relationship between two people in a simple word like friendship, love, affection and enemy or to predict the outcome, like marriage.
-</p><br />
+                            </p><br />
                             <p data-v-14591542>
-                                The above tool tries to find the answer to questions likes "what is our relationship?" or to give you a sense of what is going on between you and another person. You are only asked to enter the two names between which you want to calculate the relationship.
-</p><br />
+                                The above tool tries to find the answer to questions likes "what is our relationship?" or to give you a sense of what is going on between you and another person.You are only asked to enter the two names between which you want to calculate the relationship.
+                            </p><br />
                             <p data-v-14591542>
                                 The flames calculator is based on quite a simple algorithm in which FLAMES stands for:
-</p><br />
+                            </p><br />
                             <ul style={{ alignItems: 'center', marginLeft: '30px' }}>
                                 <li>■ Friendship;</li>
-                                <li>
-                                    ■ Love;</li>
-
-                                <li>■ Affection;</li>
-
-                                <li>■ Marriage;</li>
-                                <li>
-                                    ■ Enemy;</li>
-
+                                <li>■ Love;</li>
+                                <li>■ Affection; </li>
+                                <li>■ Marriage; </li>
+                                <li>■ Enemy; </li>
                                 <li>■ Siblings.</li>
                             </ul>
                             <br />
                             <p>
                                 The FLAMES test is actually a compatibility analysis that reveals to what extent the relationship between two persons can go, defining that into 6 simple words.
-</p><br />
-                            <p>You can use it as a love meter to see whether you and your crush have any chance to get serious or simply to see what future holds between you and the person you just met. This is just another fun name game that most pre-teens and teens have tried.
-</p><br />
+                            </p><br />
+                            <p>You can use it as a love meter to see whether you and your crush have any chance to get serious or simply to see what future holds between you and the person you just met.This is just another fun name game that most pre-teens and teens have tried.
+                            </p><br />
                             <p>
-                                You can also play the flames game on paper by writing the two names for which you want the relationship reading. Then you need to eliminate the letters that are common to both words, no matter how many times they appear.
-</p><br />
+                                You can also play the flames game on paper by writing the two names for which you want the relationship reading.Then you need to eliminate the letters that are common to both words, no matter how many times they appear.
+                            </p><br />
                             <p>
-                                The next step is to count the letters that remained. Then you use the number you obtained to count the letters from the word Flames. If the number is greater than 6 you continue counting from the letter F once again. The letter on which the number lands on reveals the relationship between the two persons.
-</p>
+                                The next step is to count the letters that remained.Then you use the number you obtained to count the letters from the word Flames.If the number is greater than 6 you continue counting from the letter F once again.The letter on which the number lands on reveals the relationship between the two persons.
+                            </p>
                         </Card>
                         <br />
                     </Grid>

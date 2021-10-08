@@ -12506,10 +12506,10 @@ a.has-text-danger-dark:hover {
   background-color: #fafafa;
   padding: 3rem 1.5rem 6rem;
 }
-
-.  {
-  letter-spacing: 0.05em;
-}
+/* 
+*{ 
+  letter-spacing: 0.0em;
+} */
 
 .card.is-rounded {
   border-radius: 0.5em;

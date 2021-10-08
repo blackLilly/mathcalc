@@ -67,16 +67,19 @@
 
     <script async src="https://cse.google.com/cse.js?cx=8f2ae5569718d79ac"></script>
 
-</head>
-
-<body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFSSKHB" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    <div id="root"></div>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 
     <script>
+        window.OneSignal = window.OneSignal || [];
+        OneSignal.push(function () {
+            OneSignal.init({
+                appId: "d59bf333-c5c9-49db-8ab7-b76eb7e56277",
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+
         (function (l) {
             if (l.search[1] === '/') {
                 var decoded = l.search.slice(1).split('&').map(function (s) {
@@ -88,23 +91,12 @@
             }
         }(window.location));
 
-        window.addEventListener('load', (e) => {
-            setTimeout(() => {
-                if (Notification.permission !== "denied") {
-                    Notification.requestPermission().then(function (permission) {
-                        // If the user accepts, let's create a notification
-                        if (permission === "granted") {
-                            var notification = new Notification("Hi there! welcome to mathcalc ! 😎 ");
-                        }
-                    });
-                }
-                // At last, if the user has denied notifications, and you
-                // want to be respectful there is no need to bother them any more.
-            }, 3000);
-
-        });
-
     </script>
+
+</head>
+
+<body>
+    <div id="root"></div>
 </body>
 
 </html>

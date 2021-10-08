@@ -62,6 +62,7 @@ const Sidebar = (props) => {
     let urls = [
         { url: '/', urlname: 'Home', icon: <Home /> },
         { url: '/general', urlname: 'General', icon: <Accessibility /> },
+        { url: '/marvel', urlname: 'Marvel', icon: <>M</> },
         { url: '/youtube-video-downloader', urlname: 'Youtube dl', icon: <DownloadIcon /> },
         { url: '/maths', urlname: 'Mathematics', icon: <Functions /> },
         { url: '/numbers', urlname: 'Numbers', icon: <>N</> },
@@ -81,7 +82,7 @@ const Sidebar = (props) => {
     return (
         <>
             <CssBaseline />
-            {!props.handleDrawerToggle ? <div className={classes.toolbar} style={{ marginBottom: '3px' }}>
+            {!props.handleDrawerToggle ? <div className={classes.toolbar} >
                 <div style={{ display: 'flex', alignItems: 'center', margin: '13px' }}
                     onClick={(e) => { window.location = '/' }}>
                     <Avatar className={classes.logo}>

@@ -38,6 +38,7 @@ export default function Finance() {
         { url: '/finance/compound-interest', desc: 'Compound Interest' },
         { url: '/finance/discount', desc: 'Discount' },
         { url: '/finance/emi-calculator', desc: 'EMI Calculator' },
+        { url: '/finance/gst-calculator', desc: 'GST Calculator' },
     ]
 
     return (

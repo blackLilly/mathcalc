@@ -725,6 +725,15 @@ td.gsc-search-button:hover {
   font-size: x-large;
 }
 
+particle {
+  border-radius: 50%;
+  left: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transition-duration: 1s;
+}
+
 .gsc-input-box {
   border: none !important;
   border-radius: 21px;
@@ -732,7 +741,7 @@ td.gsc-search-button:hover {
   align-items: center;
   height: 28px;
   padding: 4px;
-  background-color:transparent;
+  background-color: transparent;
 }
 .gsc-search-box {
   margin-bottom: 0px !important;

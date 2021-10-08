@@ -54,6 +54,7 @@ const Filesconverter = lazy(() => import('./Pages/Files/Filesconverter'));
 const BasesfEncode = lazy(() => import('./Pages/Files/apps/BasesfEncode'));
 
 const Finance = lazy(() => import('./Pages/Finance/Finance'));
+const Gstcalc = lazy(() => import('./Pages/Finance/apps/Gstcalc'));
 
 const Maths = lazy(() => import('./Pages/Maths/Maths'));
 const General = lazy(() => import("./Pages/General/General"));
@@ -92,7 +93,10 @@ const Basesfdecode = lazy(() => import("./Pages/Files/apps/Basesfdecode"));
 const Passwordgenerator = lazy(() => import("./Pages/Tools/Passwordgenerator"));
 const Imagecompressor = lazy(() => import('./Pages/Files/apps/Imagecompressor'));
 const Zipfiles = lazy(() => import("./Pages/Files/apps/Zipfiles"));
-const Ytvideo = lazy(() => import("./Pages/videodo/Ytvideo"));
+
+const Ytvideo = lazy(() => import("./Pages/apps/Ytvideo"));
+const Marvel = lazy(() => import("./Pages/apps/Marvel"));
+
 const Imagetopdf = lazy(() => import("./Pages/Files/apps/Imagetopdf"));
 const Randomnumgen = lazy(() => import("./Pages/Maths/apps/Randomnumgen"));
 const Power = lazy(() => import("./Pages/physics/apps/Power"));
@@ -208,6 +212,7 @@ function App() {
                 <Route exact path="/finance/compound-interest" component={CompoundInterest} />
                 <Route exact path="/finance/discount" component={Discount} />
                 <Route exact path="/finance/emi-calculator" component={EmiCalc} />
+                <Route exact path="/finance/gst-calculator" component={Gstcalc} />
 
                 {/* routes for physics */}
                 <Route exact path="/physics" component={Physics} />
@@ -257,6 +262,7 @@ function App() {
                 <Route exact path="/base64-decode" component={Basesfdecode} />
 
                 <Route exact path="/youtube-video-downloader" component={Ytvideo} />
+                <Route exact path="/marvel" component={Marvel} />
 
                 <Route exact path="/privacy-policy" component={Privacy} />
                 <Route exact path="/terms-of-use" component={Termsofuse} />

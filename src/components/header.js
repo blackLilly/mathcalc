@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
         zIndex: 1,
         borderRight: '1px solid #dbdbdb',
         backgroundColor: '#fafafa',
-        boxShadow: '0px 2px 3px -5px rgb(0 0 0 / 5%), 0px 0px 5px 0px rgb(0 0 0 / 4%), 0px 1px 10px 0px rgb(0 0 0 / 12%)',
+        boxShadow: '0px 2px 2px 0px rgb(0 0 0 / 0%), 0px 2px 3px 0px rgb(0 0 0 / 13%), 0px 1px 1px 0px rgb(0 0 0 / 12%) !important',
     },
     logo: {
         width: 35,

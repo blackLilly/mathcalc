@@ -184,6 +184,7 @@ export default function Main(props) {
                                         <p><Link to="/finance/compound-interest">Compound Interest</Link></p>
                                         <p><Link to="/finance/discount/">Discount</Link></p>
                                         <p><Link to="/finance/emi-calculator/">EMI Calculator</Link></p>
+                                        <p><Link to="/finance/gst-calculator/">GST Calculator</Link></p>
                                     </div>
                                     <p className={classes.linkRoot}>
                                         <Link className={classes.linkElem} to='/finance/'>More →</Link>
