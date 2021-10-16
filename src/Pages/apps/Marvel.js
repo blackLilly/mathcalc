@@ -1,23 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-    Container, Grid, Box, Typography, Divider, Button, TextField, Paper,
-    Dialog, DialogTitle, DialogContent, Card, CardMedia, CardContent, CardActionArea, IconButton
+    Container, Grid, Box, Typography, Button, TextField, FormControl, FormControlLabel, Radio, RadioGroup,
+    Card, CardMedia, CardContent, CardActions, CircularProgress
 } from '@material-ui/core';
 import Helmet from 'react-helmet';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-
-import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,10 +28,11 @@ const useStyles = makeStyles((theme) => ({
     },
     divConvertor: {
         display: 'flex',
+        flexWrap: 'wrap',
         textAlign: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        marginBottom: '4rem',
+        marginBottom: '1rem',
     },
     divConvertorGrid: {
         [theme.breakpoints.up('sm')]: {
@@ -87,6 +76,19 @@ const useStyles = makeStyles((theme) => ({
             marginBottom: '20px'
         }
     },
+    btnLoadMore: {
+        left: '30%',
+        right: '30%',
+        minWidth: 254,
+        width: '40%',
+        marginTop: '15px',
+        height: '48px',
+        [theme.breakpoints.down('md')]: {
+            width: '100%',
+            left: '0',
+            right: '0',
+        }
+    },
     divControls: {
         textAlign: 'left',
         paddingLeft: '1rem'
@@ -128,45 +130,153 @@ const useStyles = makeStyles((theme) => ({
     resetContainer: {
         padding: theme.spacing(3),
     },
+    span: {
+        position: 'absolute',
+        justifyContent: 'center',
+        right: '33%',
+        bottom: '-5%',
+        fontSize: 'x-large'
+    },
+    fignotfound: {
+        maxWidth: '350px',
+        height: 'auto',
+    }
 }));
 
-export default function Ytvideo() {
-    const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
+export default function Marvel() {
     const classes = useStyles();
-    const [searchChars, setSearchChars] = React.useState('');
+    const [searchChars, setSearchChars] = React.useState('black');
     const [allChars, setAllChars] = React.useState([]);
+    const [allComics, setComics] = React.useState([]);
+    const [allSeries, setSeries] = React.useState([]);
+    const [allEvets, setEvents] = React.useState([]);
+    const [type, setType] = React.useState('characters');
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [reloadUrl, setReloadUrl] = React.useState('');
+    const [offset, setOffset] = React.useState(0);
+    const [total, setTotal] = React.useState(0);
 
-    const downloadFile = async () => {
+    const LoadMore = async () => {
 
+        if (offset * 21 <= total) {
+            try {
+                window.scrollTo(0, 0);
+                setIsLoading(true);
+                let url = reloadUrl + '&offset=' + (parseInt(offset + 1)).toString();
+                setOffset(offset + 1);
+                // Storing response
+                const response = await fetch(url);
+                // Storing data in form of JSON
+                var data = await response.json();
+                console.log(data.data.offset + ' - offset ', data.data.total + " = total");
+                if (data.code === 200) {
+                    switch (type) {
+                        case 'characters':
+                            setAllChars(data.data.results);
+                            setComics([]); setEvents([]); setSeries([]);
+                            break;
+                        case 'comics':
+                            setComics(data.data.results);
+                            setEvents([]); setSeries([]); setAllChars([]);
+                            break;
+                        case 'events':
+                            setEvents(data.data.results);
+                            setComics([]); setSeries([]); setAllChars([]);
+                            break;
+                        case 'series':
+                            setSeries(data.data.results);
+                            setComics([]); setEvents([]); setAllChars([]);
+                            break;
+                        default:
+                            break;
+                    }
+                    setIsLoading(false);
+                }
+            } catch (e) {
+                console.log(e);
+                setIsLoading(false);
+            }
+        } else {
+            document.getElementById('btnLoadMore').style.display = 'none';
+        }
     }
-
     const GetAllChars = async () => {
         try {
-            let url = 'https://gateway.marvel.com/v1/public/characters?ts=1&apikey=a76e4420bee50924890ee6425633932b&hash=1e8774a2170848870f6b3d2503a3ec25';
+            setIsLoading(true);
+            let searchQuery = '';
+            if (searchChars !== '') {
+                switch (type) {
+                    case 'characters':
+                        searchQuery = '&nameStartsWith=' + searchChars;
+                        break;
+                    case 'comics':
+                        searchQuery = '&titleStartsWith=' + searchChars;
+                        break;
+                    case 'events':
+                        searchQuery = '&nameStartsWith=' + searchChars;
+                        break;
+                    case 'series':
+                        searchQuery = '&titleStartsWith=' + searchChars;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            let url = 'https://gateway.marvel.com/v1/public/' + type + '?ts=1&apikey=a76e4420bee50924890ee6425633932b&hash=1e8774a2170848870f6b3d2503a3ec25&limit=21' + searchQuery;
+            setReloadUrl(url);
             // Storing response
             const response = await fetch(url);
             // Storing data in form of JSON
             var data = await response.json();
-            console.log(data);
-            if (data.code == 200) {
-                setAllChars(data.data.results)
+            console.log(data.data.offset + ' - offset ', 'count : -' + data.data.count + " " + data.data.total + " = total");
+            if (data.code === 200) {
+                setOffset(data.data.offset);
+                setTotal(data.data.total);
+                console.log(data.data.results)
+                if (total > 21 * offset) {
+                    document.getElementById('btnLoadMore').style.display = 'block';
+                } else {
+                    document.getElementById('btnLoadMore').style.display = 'none';
+                }
+                switch (type) {
+                    case 'characters':
+                        setAllChars(data.data.results);
+                        setComics([]); setEvents([]); setSeries([]);
+                        break;
+                    case 'comics':
+                        setComics(data.data.results);
+                        setEvents([]); setSeries([]); setAllChars([]);
+                        break;
+                    case 'events':
+                        setEvents(data.data.results);
+                        setComics([]); setSeries([]); setAllChars([]);
+                        break;
+                    case 'series':
+                        setSeries(data.data.results);
+                        setComics([]); setEvents([]); setAllChars([]);
+                        break;
+                    default:
+                        break;
+                }
+                setIsLoading(false);
             }
         } catch (e) {
             console.log(e);
+            setIsLoading(false);
         }
     }
-
     React.useEffect(() => {
+        // eslint-disable-next-line
         GetAllChars();
-    }, []);
+        // eslint-disable-next-line
+    }, [type]);
 
     return (
-        <div className={classes.root}>
+        <div className={classes.root}  >
             <Helmet>
-                <title>Youtube video downloader - Online Youtube Video Downloader | mathcalc</title>
-                <meta name="description" content="Convert,preview and download Youtube videos to MP3, MP4, 3GP for free with our Youtube video downloader. The downloading is very quick and simple, just wait a few seconds for the file to be ready on your device." />
-                <meta name="keywords" content="youtube, convert video, mp4, mp3, webm, varius quality,medium, low, high quality,youtube video downloader, youtube downloader/" />
+                <title>Modern marvel | find all your favourite marvel characters , episodes and movies |super heroes &amp; villains| mathcalc</title>
+                <meta name="description" content="Learn about your favorite Marvel characters, super heroes, &amp; villains! Discover their powers, weaknesses, abilities, &amp; more!" />
+                <meta name="keywords" content="modern marvels, marvel characters, super heroes, super villains list | marvel" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
             </Helmet>
             <Box m={3} className={classes.appBar}>
@@ -180,7 +290,6 @@ export default function Ytvideo() {
                         <TextField variant="outlined" id="s_input" className={classes.searchInput}
                             type="search"
                             autoComplete='true'
-                            autoFocus
                             onChange={e => {
                                 setSearchChars(e.target.value)
                             }}
@@ -188,21 +297,176 @@ export default function Ytvideo() {
                     </Grid>
                     <Grid className={classes.griditem} item sm={3} md={3} lg={3}>
                         <Button variant="contained" className={classes.btnInput} color="secondary"
-
+                            onClick={GetAllChars}
                         >Search</Button>
                     </Grid>
                 </Grid>
+                <Grid style={{ marginTop: '2rem' }}>
+                    <FormControl component="fieldset">
+                        <RadioGroup row aria-label="type" name="row-radio-buttons-group" value={type} onChange={e => {
+                            setType(e.target.value);
+                        }}>
+                            <FormControlLabel value="characters" control={<Radio />} label="Characters" />
+                            <FormControlLabel value="comics" control={<Radio />} label="Comics" />
+                            <FormControlLabel value="events" control={<Radio />} label="Events" />
+                            <FormControlLabel value="series" control={<Radio />} label="Series" />
+                        </RadioGroup>
+                    </FormControl>
+                </Grid>
             </Box>
             <Container maxWidth="xl">
-                {
-                    allChars && allChars.length > 0 ? <>
-                        {
-                            allChars.map((chars, i) => {
-                                return <div key={i}><img src={chars.thumbnail.path + "." + chars.thumbnail.extension} /></div>
-                            })
-                        }
-                    </> : <></>
-                }
+                <Box style={{ display: isLoading ? 'none' : 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
+
+                    {
+                        allChars && allChars.length > 0 ? <>
+                            {
+                                allChars.map((chars, i) => {
+                                    return <>
+                                        <Card style={{ minWidth: 340, maxWidth: 340, margin: '10px 4px' }}>
+                                            <CardMedia
+                                                component="img"
+                                                alt="green iguana"
+                                                height={140}
+                                                style={{ maxHeight: 240 }}
+                                                image={chars.thumbnail.path + "." + chars.thumbnail.extension}
+                                            />
+                                            <CardContent>
+                                                <Typography gutterBottom variant="h5" component="div">
+                                                    {chars.name}
+                                                </Typography>
+                                                <Typography variant="body2" color="text.secondary" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                                    {chars.description === "" ? "Description not available !! " : chars.description}
+                                                </Typography>
+                                            </CardContent>
+                                            <CardActions>
+                                                <Link to={'/marvels/view?type=characters&id=' + chars.id} >
+                                                    <Button variant="contained" color="secondary">View</Button>
+                                                </Link>
+                                            </CardActions>
+                                        </Card>
+                                    </>
+                                })
+                            }
+                        </> : <div style={{ textAlign: 'center' }}>
+                            <figure className={classes.fignotfound} style={{ display: type === 'characters' ? 'block' : 'none' }}>
+                                <img alt="no results found !" height="154px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAS-Qz1RbBhuHyiAeIrQlajkXGt2aPeFVPoA&usqp=CAU" />
+                            </figure>
+                        </div>
+                    }
+
+                    {
+                        allComics && allComics.length > 0 ? <>
+                            {
+                                allComics.map((chars, i) => {
+                                    return <>
+                                        <Card style={{ minWidth: 340, maxWidth: 340, margin: '10px 4px' }}>
+                                            <CardMedia
+                                                component="img"
+                                                alt="green iguana"
+                                                height={140}
+                                                style={{ maxHeight: 240 }}
+                                                image={chars.thumbnail.path + "." + chars.thumbnail.extension}
+                                            />
+                                            <CardContent>
+                                                <Typography gutterBottom variant="h5" component="div">
+                                                    {chars.title}
+                                                </Typography>
+                                            </CardContent>
+                                            <CardActions>
+                                                <Link to={'/marvels/view?type=comics&id=' + chars.id} >
+                                                    <Button variant="contained" color="secondary">View</Button>
+                                                </Link>
+                                            </CardActions>
+                                        </Card>
+                                    </>
+                                })
+                            }
+                        </> : <>
+                            <figure className={classes.fignotfound} style={{ display: type === 'comics' ? 'block' : 'none' }}>
+                                <img alt="no results found !" height="154px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAS-Qz1RbBhuHyiAeIrQlajkXGt2aPeFVPoA&usqp=CAU" />
+                            </figure>
+                        </>
+                    }
+
+                    {
+                        allSeries && allSeries.length > 0 ? <>
+                            {
+                                allSeries.map((chars, i) => {
+                                    return <>
+                                        <Card style={{ minWidth: 340, maxWidth: 340, margin: '10px 4px' }}>
+                                            <CardMedia
+                                                component="img"
+                                                alt="green iguana"
+                                                height={140}
+                                                style={{ maxHeight: 240 }}
+                                                image={chars.thumbnail.path + "." + chars.thumbnail.extension}
+                                            />
+                                            <CardContent>
+                                                <Typography gutterBottom variant="h5" component="div">
+                                                    {chars.name}
+                                                </Typography>
+                                                <Typography variant="body2" color="text.secondary">
+                                                    {chars.description === "" ? "Description not available !! " : chars.description}
+                                                </Typography>
+                                            </CardContent>
+                                            <CardActions>
+                                                <Link to={'/marvels/view?type=series&id=' + chars.id} >
+                                                    <Button variant="contained" color="secondary">View</Button>
+                                                </Link>
+                                            </CardActions>
+                                        </Card>
+                                    </>
+                                })
+                            }
+                        </> : <>
+                            <figure className={classes.fignotfound} style={{ display: type === 'series' ? 'block' : 'none' }}>
+                                <img alt="no results found !" height="154px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAS-Qz1RbBhuHyiAeIrQlajkXGt2aPeFVPoA&usqp=CAU" />
+                            </figure>
+                        </>
+                    }
+
+                    {
+                        allEvets && allEvets.length > 0 ? <>
+                            {
+                                allEvets.map((chars, i) => {
+                                    return <>
+                                        <Card style={{ minWidth: 340, maxWidth: 340, margin: '10px 4px' }}>
+                                            <CardMedia
+                                                component="img"
+                                                alt="green iguana"
+                                                height={140}
+                                                style={{ maxHeight: 240 }}
+                                                image={chars.thumbnail.path + "." + chars.thumbnail.extension}
+                                            />
+                                            <CardContent>
+                                                <Typography gutterBottom variant="h5" component="div">
+                                                    {chars.name}
+                                                </Typography>
+                                                <Typography variant="body2" color="text.secondary">
+                                                    {chars.description === "" ? "Description not available !! " : chars.description}
+                                                </Typography>
+                                            </CardContent>
+                                            <CardActions>
+                                                <Link to={'/marvels/view?type=events&id=' + chars.id} >
+                                                    <Button variant="contained" color="secondary">View</Button>
+                                                </Link>
+                                            </CardActions>
+                                        </Card>
+                                    </>
+                                })
+                            }
+                        </> : <>
+                            <figure className={classes.fignotfound} style={{ display: type === 'events' ? 'block' : 'none' }}>
+                                <img alt="no results found !" height="154px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAS-Qz1RbBhuHyiAeIrQlajkXGt2aPeFVPoA&usqp=CAU" />
+                            </figure>
+                        </>
+                    }
+                </Box>
+                <Button style={{ display: isLoading ? 'none' : 'block', textTransform: 'none' }} onClick={LoadMore}
+                    className={classes.btnLoadMore} id="btnLoadMore" variant="contained" color="secondary">Load More</Button>
+                <div style={{ display: isLoading ? 'block' : 'none', textAlign: 'center' }}>
+                    <CircularProgress style={{ width: '80px', height: '82px', color: '#f44336' }} />
+                </div>
             </Container >
         </div >
     )

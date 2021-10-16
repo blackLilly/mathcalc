@@ -284,7 +284,28 @@ export default function Main(props) {
                                 </div>
                             </Card>
                         </Grid>
-                        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}></Grid>
+                        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                            <Card style={{ height: '100%' }} elevation={2}>
+                                <div className="divContents">
+                                    <div className="content">
+                                        <h5 className="title is-5">
+                                            <Link to={'/files'}
+                                                key={'Files'}>
+                                                Favourites
+                                            </Link>
+                                        </h5>
+                                        <p><Link to='/marvels'>Modern marvels</Link></p>
+                                        <p><Link to='/general/flames-calculator/'>Flames Calculator</Link></p>
+                                        <p><Link to="/image-size-reducer/" >Online Image size reducer</Link></p>
+                                        <p><Link to="/online-image-editor/">Online Image Editor</Link></p>
+                                        <p><Link to="/finance/gst-calculator/">GST Calculator</Link></p>
+                                    </div>
+                                    <p className={classes.linkRoot}>
+                                        <Link className={classes.linkElem} to="/marvel/">More →</Link>
+                                    </p>
+                                </div>
+                            </Card>
+                        </Grid>
                     </Grid>
                 </div>
             </div>

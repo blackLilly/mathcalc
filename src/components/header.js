@@ -197,7 +197,7 @@ function Header(props) {
                             <Avatar className={classes.logo}>
                                 <img src={logo} alt="mathcalc logo" width={40} height={40} />
                             </Avatar>
-                            <Typography variant="h6"><strong>Mathcalc</strong></Typography>
+                            <Typography variant="h6"><strong id="lbltitle">Mathcalc</strong></Typography>
                         </Link>
                     </Typography>
                     <div className={classes.rightMenus}>
@@ -205,7 +205,7 @@ function Header(props) {
                             <div className="gcse-search"></div>
                         </div>
                         <Link to='/feedback/' style={{ color: '#fff' }} className={classes.sectionDesktop}>
-                            <Button variant="contained" color="primary" style={{ textTransform: 'none', borderRadius:'21px' }}>
+                            <Button variant="contained" color="primary" style={{ textTransform: 'none', borderRadius: '21px' }}>
                                 Share feedback
                             </Button>
                         </Link>
