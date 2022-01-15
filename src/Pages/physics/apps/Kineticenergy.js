@@ -84,8 +84,10 @@ export default function Kineticenergy() {
         <div className={classes.root}>
             <Helmet>
                 <title>Free kinetic energy calculator online | mathcalc</title>
-                <meta name="keywords" content="kinetic energy, mass, velocity, energy calculator" />
-                <meta name="description" content="In physics, the kinetic energy of an object is the energy that it possesses due to its motion." />
+                <meta name="description" content="Calculate the unknown variable in the equation for kinetic energy, where kinetic energy is equal to one half times the mass multiplied by velocity squared; KE = 1/2 * mv^2. Free online physics calculators, mechanics, energy, calculators." />
+                <meta itemprop="description" content="Calculate the unknown variable in the equation for kinetic energy, where kinetic energy is equal to one half times the mass multiplied by velocity squared; KE = 1/2 * mv^2. Free online physics calculators, mechanics, energy, calculators." />
+                <meta name="keywords" content="energy, mass, velocity, physics, newtons, work calculator, mechanics, physics" />
+                <meta itemprop="keywords" content="energy, mass, velocity, physics, newtons, work calculator, mechanics, physics" />
                 <meta name="author" content="Mathcalc" />
                 <meta name="copyright" content="Mathcalc Inc. Copyright (c) 2021" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
@@ -177,8 +179,8 @@ export default function Kineticenergy() {
                                 <Typography>
                                     In physics, the kinetic energy of an object is the energy that it possesses due to its motion.
                                     It is defined as the work needed to accelerate a body of a given mass from rest to its stated velocity.
-                                 <br /><br />   Having gained this energy during its acceleration, the body maintains this kinetic energy unless its speed changes.
-                                 The same amount of work is done by the body when decelerating from its current speed to a state of rest. <br />
+                                    <br /><br />   Having gained this energy during its acceleration, the body maintains this kinetic energy unless its speed changes.
+                                    The same amount of work is done by the body when decelerating from its current speed to a state of rest. <br />
                                 </Typography>
                                 <br />
                                 <figure className="image">
@@ -189,12 +191,12 @@ export default function Kineticenergy() {
                                     <strong>m</strong> traveling at a speed <strong>v</strong>
                                     <br /><br />
                                     he standard unit of kinetic energy is the joule, while the English unit of kinetic energy is the foot-pound.
-                                    </p>
+                                </p>
                                 <br />
                                 <br />
                                 <p>
                                     Energy occurs in many forms, including chemical energy, thermal energy, electromagnetic radiation, gravitational energy, electric energy, elastic energy, nuclear energy, and rest energy. These can be categorized in two main classes: potential energy and kinetic energy. Kinetic energy is the movement energy of an object. Kinetic energy can be transferred between objects and transformed into other kinds of energy
-<br />
+                                    <br />
                                     <br />
                                     Kinetic energy may be best understood by examples that demonstrate how it is transformed to and from other forms of energy. For example, a cyclist uses chemical energy provided by food to accelerate a bicycle to a chosen speed. On a level surface, this speed can be maintained without further work, except to overcome air resistance and friction. The chemical energy has been converted into kinetic energy, the energy of motion, but the process is not completely efficient and produces heat within the cyclist.
                                     <br />
@@ -215,11 +217,11 @@ export default function Kineticenergy() {
                                     <br />
                                     <br />
                                     Several mathematical descriptions of kinetic energy exist that describe it in the appropriate physical situation. For objects and processes in common human experience, the formula ½mv² given by Newtonian (classical) mechanics is suitable. However, if the speed of the object is comparable to the speed of light, relativistic effects become significant and the relativistic formula is used. If the object is on the atomic or sub-atomic scale, quantum mechanical effects are significant, and a quantum mechanical model must be employed.
-</p>
+                                </p>
                             </Card>
                         </Grid>
                         <Grid item lg={4} md={4} sm={12}>
-                        <VerticalAds /></Grid>
+                            <VerticalAds /></Grid>
                     </Grid>
                 </div>
             </Container >

@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 function scrolldiv(div) {
     window.scroll(0,
-        findPosition(div));
+        findPosition(div) - findPosition(div) / 1.5);
 }
 function findPosition(obj) {
     var currenttop = 0;
@@ -62,7 +62,7 @@ export default function Googleadsensecalc(props) {
         setTimeout(() => {
             resultDiv.className = 'resultcon';
         }, 1000);
-        scrolldiv(resultDiv)
+        scrolldiv(resultDiv);
     }
     const onChangeInput = (e) => {
         setState({

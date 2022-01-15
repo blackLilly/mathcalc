@@ -295,6 +295,7 @@ export default function Main(props) {
                                             </Link>
                                         </h5>
                                         <p><Link to='/marvels'>Modern marvels</Link></p>
+                                        <p><Link to='/astronomy-picture-of-the-day'>Astronomy Picture of the Day</Link></p>
                                         <p><Link to='/general/flames-calculator/'>Flames Calculator</Link></p>
                                         <p><Link to="/image-size-reducer/" >Online Image size reducer</Link></p>
                                         <p><Link to="/online-image-editor/">Online Image Editor</Link></p>

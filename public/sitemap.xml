@@ -647,6 +647,11 @@
         <changefreq>yearly</changefreq>
     </url>
 
+    <url>
+        <loc>https://mathcalc.xyz/astronomy-picture-of-the-day</loc>      
+        <lastmod>2021-10-10</lastmod>
+        <changefreq>yearly</changefreq>
+    </url>
 
     <url>
         <loc>https://mathcalc.xyz/image-to-pdf</loc>      

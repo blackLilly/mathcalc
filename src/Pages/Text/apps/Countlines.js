@@ -55,7 +55,7 @@ export default function CountLetters() {
             do {
                 currenttop += obj.offsetTop;
             } while ((obj = obj.offsetParent));
-            return [currenttop];
+            currenttop = 0; return [currenttop];
         }
     }
     const onClickCalculate = () => {
@@ -85,7 +85,7 @@ export default function CountLetters() {
         }
         //blink the result
         let resultDiv = document.getElementsByClassName('resultDiv')[0];
-        scrolldiv(resultDiv);
+        scrolldiv(resultDiv);;
         resultDiv.className = 'resultDiv blink_me'
         setTimeout(() => {
             resultDiv.className = 'resultDiv';

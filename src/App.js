@@ -55,6 +55,7 @@ const BasesfEncode = lazy(() => import('./Pages/Files/apps/BasesfEncode'));
 
 const Finance = lazy(() => import('./Pages/Finance/Finance'));
 const Gstcalc = lazy(() => import('./Pages/Finance/apps/Gstcalc'));
+const NetIncome = lazy(() => import('./Pages/Finance/apps/NetIncome'));
 
 const Maths = lazy(() => import('./Pages/Maths/Maths'));
 const General = lazy(() => import("./Pages/General/General"));
@@ -97,6 +98,7 @@ const Zipfiles = lazy(() => import("./Pages/Files/apps/Zipfiles"));
 const Ytvideo = lazy(() => import("./Pages/apps/Ytvideo"));
 const Marvel = lazy(() => import("./Pages/apps/Marvel"));
 const ViewMarvel = lazy(() => import("./Pages/apps/Viewmarvels"));
+const Apod = lazy(() => import("./Pages/apps/Apod"));
 
 const Imagetopdf = lazy(() => import("./Pages/Files/apps/Imagetopdf"));
 const Randomnumgen = lazy(() => import("./Pages/Maths/apps/Randomnumgen"));
@@ -106,6 +108,10 @@ const Pressure = lazy(() => import("./Pages/physics/apps/Pressure"));
 const Frequency = lazy(() => import("./Pages/physics/apps/Frequency"));
 const Dayofweek = lazy(() => import("./Pages/General/apps/Dayofweek"));
 const Colorconverter = lazy(() => import("./Pages/Tools/Colorconverter"));
+const Blog = lazy(() => import("./Pages/Blog/Blog"));
+
+const Dictionary = lazy(() => import("./Pages/apps/Dictionary"));
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -128,11 +134,17 @@ function usePageViews() {
       let titlediv = document.getElementById("lbltitle");
       titlediv.innerText = "Marvel Chars";
       titlediv.className = "marvelHeading";
-    } else {
-      let titlediv = document.getElementById("lbltitle");
-      titlediv.innerText = "Mathcalc";
-      titlediv.className = "";
-    }
+    } else
+      if (location.pathname === "/astronomy-picture-of-the-day" || location.pathname === "/astronomy-picture-of-the-day") {
+        let titlediv = document.getElementById("lbltitle");
+        titlediv.innerText = "Picture of The Day";
+        titlediv.className = "astroHeading";
+      }
+      else {
+        let titlediv = document.getElementById("lbltitle");
+        titlediv.innerText = "Mathcalc";
+        titlediv.className = "";
+      }
   }, [location]);
 }
 
@@ -186,6 +198,9 @@ function App() {
                 <Route exact path="/online-image-editor/" component={Imageeditor} />
                 <Route exact path="/random-password-generator/" component={Passwordgenerator} />
                 <Route exact path="/color-converter/" component={Colorconverter} />
+                <Route exact path="/english-dictionary/" component={Dictionary} />
+
+                
 
                 <Route exact path="/text-lists/" component={Textandlist} />
                 <Route exact path="/reverse-list/" component={Reverselist} />
@@ -224,6 +239,7 @@ function App() {
                 <Route exact path="/finance/discount" component={Discount} />
                 <Route exact path="/finance/emi-calculator" component={EmiCalc} />
                 <Route exact path="/finance/gst-calculator" component={Gstcalc} />
+                <Route exact path="/finance/net-income-calculator" component={NetIncome} />
 
                 {/* routes for physics */}
                 <Route exact path="/physics" component={Physics} />
@@ -275,6 +291,8 @@ function App() {
                 <Route exact path="/youtube-video-downloader" component={Ytvideo} />
                 <Route exact path="/marvels" component={Marvel} />
                 <Route exact path="/marvels/view" component={ViewMarvel} />
+                <Route exact path="/blog/" component={Blog} />
+                <Route exact path="/astronomy-picture-of-the-day/" component={Apod} />
 
                 <Route exact path="/privacy-policy" component={Privacy} />
                 <Route exact path="/terms-of-use" component={Termsofuse} />

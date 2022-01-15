@@ -551,6 +551,10 @@ h6 {
   color: #757575 !important;
 }
 
+#onesignal-bell-container .onesignal-reset .onesignal-bell-launcher-inactive {
+  opacity: 0;
+}
+
 #st-el-4 {
   -moz-transition: all 0.2s ease-in;
   -ms-transition: all 0.2s ease-in;
@@ -800,6 +804,17 @@ particle {
   height: 100px;
   width: 100px;
 }
+
+.astroHeading {
+  color: white;
+  font-family: fantasy;
+  font-size: larger;
+  background-color: rgb(0 0 0 / 70%) !important;
+  padding: 5px 15px;
+  border: none;
+  margin-left: 5px;
+}
+
 .marvelHeading {
   color: white;
   font-family: fantasy;
@@ -843,6 +858,23 @@ particle {
   background-color: #555;
   color: white;
 }
+
+.embed a {
+  display: none !important;
+}
+
+.omni-calculator-header {
+  display: none !important;
+}
+
+.embed .Calculator__control-panel.jsx-693084282 {
+  display: none !important;
+}
+
+iframe > #app > div > div:nth-child(2) {
+  display: none !important;
+}
+
 
 @keyframes pulse {
   0% {

@@ -39,6 +39,7 @@ export default function Finance() {
         { url: '/finance/discount', desc: 'Discount' },
         { url: '/finance/emi-calculator', desc: 'EMI Calculator' },
         { url: '/finance/gst-calculator', desc: 'GST Calculator' },
+        { url: '/finance/net-income-calculator', desc: 'Net Income Calculator' },
     ]
 
     return (
@@ -53,10 +54,10 @@ export default function Finance() {
                 <section className="hero" data-v-23847e07>
                     <div style={{ padding: '2rem 0.5rem' }}>
                         <div className="container">
-                            <h1 className="subtitle is-spaced is-uppercase has-text-weight-bold">Finance
+                            <h1 className="subtitle is-spaced is-uppercase has-text-weight-bold">Finance Calculators
                             </h1>
                             <p className="  has-text-grey">
-                                Common financial calculators like simple interest, Compound interest , Discount and more..
+                                It doesn’t matter whether you are the CEO of Google, a venture capitalist, a stockbroker, an entrepreneur or a simple student - we all have to admit that this world revolves around money. Almost every human interaction has something to do with finances: buying in a shop, providing services, borrowing, even going on a date. Sometimes, we feel overwhelmed with so many things to calculate and take into account, especially when it concerns our own business. Fortunately, you have discovered this place, and we will not leave you unarmed! We prepared calculators for each encounter with the cruel world of finances: business planning, investing, tax paying, debt managing, and many others. From now on, you can feel safe!
                             </p>
                         </div>
                     </div>

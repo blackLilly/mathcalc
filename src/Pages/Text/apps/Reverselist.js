@@ -59,7 +59,7 @@ export default function Reverselist() {
             do {
                 currenttop += obj.offsetTop;
             } while ((obj = obj.offsetParent));
-            return [currenttop];
+            currenttop = 0; return [currenttop];
         }
     }
     const onClickCalculate = () => {
@@ -76,7 +76,7 @@ export default function Reverselist() {
         })
         //blink the result
         let resultDiv = document.getElementsByClassName('resultsec')[0];
-        scrolldiv(resultDiv);
+        scrolldiv(resultDiv);;
         resultDiv.className = 'resultsec blink_me'
         setTimeout(() => {
             resultDiv.className = 'resultsec';

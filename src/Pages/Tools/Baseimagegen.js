@@ -15,7 +15,7 @@ function findPosition(obj) {
         do {
             currenttop += obj.offsetTop;
         } while ((obj = obj.offsetParent));
-        return [currenttop];
+        currenttop = 0; return [currenttop];
     }
 }
 

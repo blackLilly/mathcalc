@@ -70,7 +70,7 @@ export default function Caseconverter() {
             do {
                 currenttop += obj.offsetTop;
             } while ((obj = obj.offsetParent));
-            return [currenttop];
+            currenttop = 0; return [currenttop];
         }
     }
     React.useEffect(() => {
@@ -159,7 +159,7 @@ export default function Caseconverter() {
         }, 250);
         //blink the result
         let resultDiv = document.getElementsByClassName('resultsec')[0];
-        scrolldiv(resultDiv);
+        scrolldiv(resultDiv);;
         resultDiv.className = 'resultsec blink_me'
         setTimeout(() => {
             resultDiv.className = 'resultsec';

@@ -19,7 +19,7 @@
     "@testing-library/react": "^11.1.2",
     "@testing-library/user-event": "^12.2.2",
     "browser-image-compression": "^1.0.14",
-    "browserslist": "^4.16.6",
+    "browserslist": "^4.19.1",
     "caniuse-lite": "^1.0.30001210",
     "chart.js": "^3.2.1",
     "date-fns": "^2.20.1",

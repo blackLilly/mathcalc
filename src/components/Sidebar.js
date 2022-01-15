@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
             'linear-gradient(135deg, #ECEDDC 25%, transparent 25%) -50px 0, linear-gradient(225deg, #ECEDDC 25%, transparent 25%) -50px 0, linear-gradient(315deg, #ECEDDC 25%, transparent 25%),linear-gradient(45deg, #ECEDDC 25%, transparent 25%)',
         backgroundColor: '#ffff',
         height: '100%',
+        overflowY: 'scroll',
     },
     list: {
         width: 250,
@@ -63,6 +64,7 @@ const Sidebar = (props) => {
         { url: '/', urlname: 'Home', icon: <Home /> },
         { url: '/general', urlname: 'General', icon: <Accessibility /> },
         { url: '/marvels', urlname: 'Marvels', icon: <>M</> },
+        { url: '/english-dictionary', urlname: 'Dictionary', icon: <>D</> },
         { url: '/youtube-video-downloader', urlname: 'Youtube dl', icon: <DownloadIcon /> },
         { url: '/maths', urlname: 'Mathematics', icon: <Functions /> },
         { url: '/numbers', urlname: 'Numbers', icon: <>N</> },

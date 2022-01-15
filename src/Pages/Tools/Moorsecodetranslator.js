@@ -126,7 +126,7 @@ export default function Moorsecodetranslator() {
             try {
                 setState({
                     ...state,
-                    decryptedMsg: atob(url[1]),
+                    decryptedMsg: atob(url[1].split('&')[0]),
                     hrefHaveData: true,
                 });
             } catch (e) {
@@ -154,7 +154,7 @@ export default function Moorsecodetranslator() {
             do {
                 currenttop += obj.offsetTop;
             } while ((obj = obj.offsetParent));
-            return [currenttop];
+            currenttop = 0; return [currenttop];
         }
     }
 

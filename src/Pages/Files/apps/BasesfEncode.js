@@ -72,7 +72,7 @@ export default function BasesfEncode() {
 
     function scrolldiv(div) {
         window.scroll(0,
-            findPosition(div));
+            findPosition(div)- findPosition(div) / 1.5);
     }
     function findPosition(obj) {
         var currenttop = 0;
@@ -80,7 +80,7 @@ export default function BasesfEncode() {
             do {
                 currenttop += obj.offsetTop;
             } while ((obj = obj.offsetParent));
-            return [currenttop];
+            currenttop = 0; return [currenttop];
         }
     }
 
@@ -132,7 +132,7 @@ export default function BasesfEncode() {
             }, 250);
             //blink the result
             let resultDiv = document.getElementsByClassName('resultsec')[0];
-            scrolldiv(resultDiv);
+            scrolldiv(resultDiv);;
             resultDiv.className = 'resultsec blink_me'
             setTimeout(() => {
                 resultDiv.className = 'resultsec';

@@ -5,7 +5,6 @@ import {
     Card, Grid, CardContent, Collapse
     , Button, Typography, Container, Backdrop, CircularProgress
 } from '@material-ui/core';
-import CaculateIcon from '@material-ui/icons/SendOutlined';
 import MomentUtils from '@date-io/moment';
 import {
     MuiPickersUtilsProvider,
@@ -78,8 +77,8 @@ export default function Age() {
 
     const [snakOpen, setSnakOpen] = React.useState(null);
     const [snakMessage, setSnakMessage] = React.useState(null);
-    const [selectedFrom, setSelectedFrom] = React.useState(new Date().toLocaleDateString().substr(0, 9));
-    const [selectedTo, setSelectedTo] = React.useState(new Date().toLocaleDateString().substr(0, 9));
+    const [selectedFrom, setSelectedFrom] = React.useState(new Date().toLocaleDateString().substr(0, 10));
+    const [selectedTo, setSelectedTo] = React.useState(new Date().toLocaleDateString().substr(0, 10));
 
     const [dateDiff, SetDateDiff] = React.useState(0);
 
@@ -205,7 +204,6 @@ export default function Age() {
                                             variant="contained"
                                             color="primary"
                                             className={classes.button}
-                                            startIcon={<CaculateIcon />}
                                             onClick={() => { onCalculateClick() }}
                                         >Calculate</Button>
                                     </Grid>
