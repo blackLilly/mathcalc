@@ -33,6 +33,10 @@ export default function Physics() {
 
     let Url = [
         {
+            urlname: 'Astronomy Pic of the Day',
+            urlpath: '/astronomy-picture-of-the-day'
+        },
+        {
             urlname: 'Pressure',
             urlpath: '/physics/pressure'
         },
@@ -107,7 +111,7 @@ export default function Physics() {
                                         <Compress style={{
                                             width: '30px',
                                             margin: '0px 8px 0px 16px'
-                                        }} /> <span>{val.urlname + ' calculator'}</span></Link>
+                                        }} /> <span>{val.urlname + (val.urlname.indexOf('Astrono') === -1 ? ' calculator' : '')}</span></Link>
                                 })
                             }
                         </div>

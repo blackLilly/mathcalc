@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Container, Grid, Box, Typography, Button, TextField, CircularProgress
@@ -143,14 +144,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dictionary() {
     const classes = useStyles();
-    const [searchChars, setSearchChars] = React.useState('universe');
+    const [searchChars, setSearchChars] = React.useState('');
     const [isLoading, setIsLoading] = React.useState(false);
     const [ResultWords, setResultWords] = React.useState([]);
 
     const GetAllChars = async (searchword) => {
         try {
             //debugger;
-            console.log(searchChars);
+            //console.log(searchChars);
             setIsLoading(true);
             setResultWords([]);
             let url = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
@@ -181,15 +182,17 @@ export default function Dictionary() {
         let params = new URLSearchParams(document.location.search);
         // eslint-disable-next-line
         GetAllChars(params.get('word'));
+        setSearchChars(params.get('word'));
+        document.getElementById('s_input').value = params.get('word');
         // eslint-disable-next-line
-    }, []);
+    }, [useLocation()]);
 
     return (
         <div className={classes.root}  >
             <Helmet>
                 <title>Free English Dictionary | find the menings, definitions, parts of speech of all your words</title>
                 <meta name="description" content="find the menings, definitions, parts of speech of all your words" />
-                <meta name="keywords" content="find the menings, definitions, parts of speech of all your words" />
+                <meta name="keywords" content="find the menings, definitions, parts of speech of all your words, dictionary, oxforrd, synonyms, antonyms" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
             </Helmet>
             <Box m={3} className={classes.appBar}>
@@ -210,7 +213,9 @@ export default function Dictionary() {
                     </Grid>
                     <Grid className={classes.griditem} item sm={3} md={3} lg={3}>
                         <Button variant="contained" className={classes.btnInput} color="secondary"
-                            onClick={GetAllChars}
+                            onClick={(e) => {
+                                window.location = '/english-dictionary?word=' + searchChars;
+                            }}
                         >Search</Button>
                     </Grid>
                 </Grid>
@@ -245,25 +250,25 @@ export default function Dictionary() {
                                                 return <>
                                                     <Grid item md={4} lg={4} style={{ minWidth: 340, maxWidth: 340, margin: '10px 4px' }}>
                                                         <Typography component={"h3"} className={"title is-3"}>: {mngs.partOfSpeech}</Typography>
-
-                                                        {
-                                                            mngs.antonyms && mngs.antonyms.length > 0 ?
-                                                                mngs.antonyms.map((ant => {
-                                                                    return <>
-                                                                        <Typography >  <b>Antonyms :</b> {mngs.antonyms.join(',')}</Typography>
-                                                                    </>
-                                                                })) : <></>
-                                                        }
-
-                                                        {
-                                                            mngs.synonyms && mngs.synonyms.length > 0 ?
-                                                                mngs.synonyms.map((ant => {
-                                                                    return <>
-                                                                        <Typography> <b> Synonyms :</b> {mngs.synonyms.join(',')}</Typography>
-                                                                    </>
-                                                                })) : <></>
-                                                        }
-
+                                                        <Typography >  <b>Antonyms :</b>
+                                                            {
+                                                                mngs.antonyms && mngs.antonyms.length > 0 ?
+                                                                    mngs.antonyms.map((ant, i) => {
+                                                                        return <>
+                                                                            <Link to={"/english-dictionary?word=" + ant}>{ant + (mngs.antonyms.length - 1 === i ? "" : " ,")}</Link>
+                                                                        </>
+                                                                    }) : <>-</>}
+                                                        </Typography>
+                                                        <Typography> <b> Synonyms :</b>
+                                                            {
+                                                                mngs.synonyms && mngs.synonyms.length > 0 ?
+                                                                    mngs.synonyms.map((sn, i) => {
+                                                                        return <>
+                                                                            <Link to={"/english-dictionary?word=" + sn}>{sn + (mngs.synonyms.length - 1 === i ? "" : ", ")}</Link>
+                                                                        </>
+                                                                    }) : <>-</>
+                                                            }
+                                                        </Typography>
                                                         <br />
                                                         <Typography component={"h5"} className="title is-5"> Definitions </Typography>
                                                         <ul>

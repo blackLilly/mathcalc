@@ -73,7 +73,7 @@ const Sidebar = (props) => {
         { url: '/files', urlname: 'Files', icon: <>F</> },
         { url: '/finance', urlname: 'Finance', icon: <AttachMoney /> },
         { url: '/physics', urlname: 'Physics', icon: <ScatterPlot /> },
-        //{ url: '/feedback', urlname: 'Feedback', icon: <FeedbackIcon /> },
+        { url: '/feedback', urlname: 'Feedback', icon: <FeedbackIcon /> },
     ]
 
     const onChangeStyle = (e) => {

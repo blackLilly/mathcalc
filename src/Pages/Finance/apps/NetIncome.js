@@ -4,7 +4,7 @@ import {
     Container, Grid, //Card, Typography,
     Dialog, DialogActions, DialogContent, DialogTitle,
     //DialogContentText, FormControl, FormControlLabel, TextField,
-    Button,  Slide
+    Button, Slide
 } from '@material-ui/core';
 import Helmet from 'react-helmet';
 import VerticalAds from '../../../Components/VerticalAds';
@@ -69,9 +69,9 @@ export default function Finance() {
     return (
         <div className={classes.root}>
             <Helmet>
-                <title>Free Finance Calculator - Calculate some of commom financial expresion</title>
-                <meta name="keywords" content="free online finance calculator, simple interest calculator, compound interest calculator, online calculator , free calculator" />
-                <meta name="description" content="Use Mathcalc finance calculators to do the calculations for various financial calculations" />
+                <title>Free Net Income Finance Calculator - Calculate Net income by using our free calculator</title>
+                <meta name="keywords" content="net income, salary,free online finance calculator, simple interest calculator, compound interest calculator, online calculator , free calculator" />
+                <meta name="description" content="The net income calculator is a powerful tool that can help you determine if your company/start-up is profitable." />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <script async src="https://cdn.omnicalculator.com/sdk.js"></script>
             </Helmet>

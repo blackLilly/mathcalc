@@ -145,7 +145,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Marvel() {
     const classes = useStyles();
-    const [searchChars, setSearchChars] = React.useState('black');
+    const [searchChars, setSearchChars] = React.useState('iron man');
     const [allChars, setAllChars] = React.useState([]);
     const [allComics, setComics] = React.useState([]);
     const [allSeries, setSeries] = React.useState([]);

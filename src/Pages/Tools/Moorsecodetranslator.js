@@ -81,7 +81,7 @@ export default function Moorsecodetranslator() {
                     audio.play();
                 }
             }
-        }, 50);
+        }, 500);
         function clear() {
             clearTimeout(intervalid);
         }
@@ -113,7 +113,7 @@ export default function Moorsecodetranslator() {
             setState({
                 ...state,
                 [e.target.id]: e.target.value,
-                url: document.baseURI + "?" + encrpted,
+                url: document.baseURI.split("?")[0] + "?" + encrpted,
                 resulttext: resulttext
             });
         } catch (e) {

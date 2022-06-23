@@ -129,7 +129,7 @@ function usePageViews() {
   let location = useLocation();
   React.useEffect(() => {
     window.scrollTo(0, 0);
-    console.log(location);
+    //console.log(location);
     if (location.pathname === "/marvels" || location.pathname === "/marvels/view") {
       let titlediv = document.getElementById("lbltitle");
       titlediv.innerText = "Marvel Chars";

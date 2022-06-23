@@ -204,12 +204,12 @@ function Header(props) {
                         <div className={classes.search + " " + classes.sectionDesktop}>
                             <div className="gcse-search"></div>
                         </div>
-                        <Link to='/feedback/' style={{ color: '#fff', display:'none' }} className={classes.sectionDesktop}>
+                        <Link to='/feedback/' style={{ color: '#fff' }} className={classes.sectionDesktop}>
                             <Button variant="contained" color="primary" style={{ textTransform: 'none', borderRadius: '21px' }}>
                                 Share feedback
                             </Button>
                         </Link>
-                        <IconButton style={{display:'none'}} aria-controls="header-menu" className={classes.sectionMobile}
+                        <IconButton aria-controls="header-menu" className={classes.sectionMobile}
                             aria-haspopup="true" onClick={handlemenuClick}
                             aria-label="more" edge="end" color="inherit">
                             <MoreIcon />
