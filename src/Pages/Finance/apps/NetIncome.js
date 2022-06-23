@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-    Container, Grid, Card, Typography, Dialog, DialogActions, DialogContent, DialogTitle,
-    DialogContentText, FormControl, FormControlLabel, Button, TextField, Slide
+    Container, Grid, //Card, Typography,
+    Dialog, DialogActions, DialogContent, DialogTitle,
+    //DialogContentText, FormControl, FormControlLabel, TextField,
+    Button,  Slide
 } from '@material-ui/core';
 import Helmet from 'react-helmet';
 import VerticalAds from '../../../Components/VerticalAds';
@@ -38,15 +40,15 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function Finance() {
     const classes = useStyles();
 
-    const [state, setState] = React.useState({});
+    // const [state, setState] = React.useState({});
 
-    const onInputChange = (e) => {
+    // const onInputChange = (e) => {
 
-    }
+    // }
 
-    const ClearAll = (e) => {
+    // const ClearAll = (e) => {
 
-    }
+    // }
 
     const [open, setOpen] = React.useState(false);
 

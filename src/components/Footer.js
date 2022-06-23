@@ -114,6 +114,8 @@ export default function Footer() {
   let urls = [
     { url: '/', urlname: 'Home', icon: <Home className={classes.icon} /> },
     { url: '/general', urlname: 'General', icon: <Accessibility className={classes.icon} /> },
+    { url: '/marvels', urlname: 'Marvels', icon: <>M</> },
+    { url: '/english-dictionary', urlname: 'Dictionary', icon: <>D</> },
     { url: '/youtube-video-downloader', urlname: 'Youtube dl', icon: <DownloadIcon className={classes.icon} /> },
     { url: '/maths', urlname: 'Mathematics', icon: <Functions className={classes.icon} /> },
     { url: '/numbers', urlname: 'Numbers', icon: null },

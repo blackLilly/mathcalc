@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-    Container, Grid, Box, Typography, Button, TextField, FormControl, FormControlLabel, Radio, RadioGroup,
-    Card, CardMedia, CardContent, CardActions, CircularProgress
+    Container, Grid, Box, Typography, Button, TextField, CircularProgress
 } from '@material-ui/core';
 import Helmet from 'react-helmet';
 
@@ -145,28 +143,32 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dictionary() {
     const classes = useStyles();
-    const [searchChars, setSearchChars] = React.useState('black');
-    const [word, setWord] = React.useState('');
-    const [origin, setOrigin] = React.useState('');
-    const [phonetic, setPhonetic] = React.useState('');
-    const [meanings, setMeanings] = React.useState([]);
+    const [searchChars, setSearchChars] = React.useState('universe');
     const [isLoading, setIsLoading] = React.useState(false);
+    const [ResultWords, setResultWords] = React.useState([]);
 
-    const GetAllChars = async () => {
+    const GetAllChars = async (searchword) => {
         try {
-            debugger;
+            //debugger;
+            console.log(searchChars);
             setIsLoading(true);
-            let url = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + searchChars;
+            setResultWords([]);
+            let url = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
+            if (typeof (searchword) == 'string') {
+                url += searchword;
+            } else {
+                url += searchChars;
+            }
+
             // Storing response
             const response = await fetch(url);
             // Storing data in form of JSON
             var data = await response.json();
             if (data) {
-                setWord(data[0].word);
-                setOrigin(data[0].origin);
-                setPhonetic(data[0].phonetic);
-            }else{
-                setWord('no defintions for this word');
+                console.log(data);
+                setResultWords(data);
+            } else {
+                setResultWords([]);
             }
             setIsLoading(false);
         } catch (e) {
@@ -176,16 +178,18 @@ export default function Dictionary() {
     }
     React.useEffect(() => {
         // eslint-disable-next-line
-        GetAllChars();
+        let params = new URLSearchParams(document.location.search);
+        // eslint-disable-next-line
+        GetAllChars(params.get('word'));
         // eslint-disable-next-line
     }, []);
 
     return (
         <div className={classes.root}  >
             <Helmet>
-                <title>Modern marvel | find all your favourite marvel characters , episodes and movies |super heroes &amp; villains| mathcalc</title>
-                <meta name="description" content="Learn about your favorite Marvel characters, super heroes, &amp; villains! Discover their powers, weaknesses, abilities, &amp; more!" />
-                <meta name="keywords" content="modern marvels, marvel characters, super heroes, super villains list | marvel" />
+                <title>Free English Dictionary | find the menings, definitions, parts of speech of all your words</title>
+                <meta name="description" content="find the menings, definitions, parts of speech of all your words" />
+                <meta name="keywords" content="find the menings, definitions, parts of speech of all your words" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
             </Helmet>
             <Box m={3} className={classes.appBar}>
@@ -202,7 +206,7 @@ export default function Dictionary() {
                             onChange={e => {
                                 setSearchChars(e.target.value)
                             }}
-                            aria-label="Search" placeholder="Search your favourite characters" value={searchChars} />
+                            aria-label="Search" placeholder="Search your favourite word" value={searchChars} />
                     </Grid>
                     <Grid className={classes.griditem} item sm={3} md={3} lg={3}>
                         <Button variant="contained" className={classes.btnInput} color="secondary"
@@ -211,17 +215,101 @@ export default function Dictionary() {
                     </Grid>
                 </Grid>
             </Box>
-            <Container maxWidth="xl">
-                <Box style={{ display: isLoading ? 'none' : 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
-                    <p>  <b> word:</b> {word} <br />
-                        <b>Origin:</b> {origin} <br />
-                        <b> Phonetic:</b> {phonetic} <br />
-                    </p>
-                </Box>
+            <Container maxWidth={'md'} p={3} style={{ display: isLoading ? 'none' : 'block', textAlign: 'left' }} >
+                {
+                    ResultWords && ResultWords.length > 0 ?
+                        ResultWords.map((wrd, i) => {
+                            return <>
+                                <h1 className={"title is-1 m-0"}>{wrd.word}</h1>
+                                <b> Phonetic:</b> {wrd.phonetic} <br />
+
+                                {
+                                    wrd.phonetics.filter(p => p.audio.length > 0).map((phn) => {
+                                        return <>
+                                            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+                                                <span>{phn.text} &nbsp; :- &nbsp;</span>
+                                                <audio controls title={phn.text}>
+                                                    <source src={phn.audio} type="audio/mpeg"></source>
+                                                    Your browser does not support the audio element.
+                                                </audio>
+                                            </div>
+                                        </>
+                                    })
+                                }
+                                <br />
+                                <h2 className="title is-2">Meanings (Parts Of Speech)</h2>
+                                <div style={{ flexGrow: 1 }}>
+                                    <Grid container spacing={1}>
+                                        {
+                                            wrd.meanings.map((mngs) => {
+                                                return <>
+                                                    <Grid item md={4} lg={4} style={{ minWidth: 340, maxWidth: 340, margin: '10px 4px' }}>
+                                                        <Typography component={"h3"} className={"title is-3"}>: {mngs.partOfSpeech}</Typography>
+
+                                                        {
+                                                            mngs.antonyms && mngs.antonyms.length > 0 ?
+                                                                mngs.antonyms.map((ant => {
+                                                                    return <>
+                                                                        <Typography >  <b>Antonyms :</b> {mngs.antonyms.join(',')}</Typography>
+                                                                    </>
+                                                                })) : <></>
+                                                        }
+
+                                                        {
+                                                            mngs.synonyms && mngs.synonyms.length > 0 ?
+                                                                mngs.synonyms.map((ant => {
+                                                                    return <>
+                                                                        <Typography> <b> Synonyms :</b> {mngs.synonyms.join(',')}</Typography>
+                                                                    </>
+                                                                })) : <></>
+                                                        }
+
+                                                        <br />
+                                                        <Typography component={"h5"} className="title is-5"> Definitions </Typography>
+                                                        <ul>
+                                                            {
+                                                                mngs.definitions.map((def) => {
+                                                                    return <>
+                                                                        <li style={{ 'list-style-type': 'disc', marginLeft: '20px' }}>{def.definition}</li>
+                                                                    </>
+                                                                })
+                                                            }
+                                                        </ul>
+                                                    </Grid>
+                                                </>
+                                            })
+                                        }
+
+                                    </Grid>
+
+                                    <p>
+                                        <b> Source :</b>
+                                        <ul>
+                                            {
+                                                wrd.sourceUrls && wrd.sourceUrls.length > 0 ?
+                                                    wrd.sourceUrls.map((src => {
+                                                        return <>
+
+                                                            <li><a style={{ 'list-style-type': 'disc', marginLeft: '20px', color: 'blue' }} href={src} target="_blank" rel="noreferrer">{src}</a></li>
+                                                        </>
+                                                    })) : <></>
+                                            }
+
+                                        </ul>
+                                    </p>
+
+                                </div>
+
+                            </>
+                        }
+                        ) : <></>
+                }
+
+
                 <div style={{ display: isLoading ? 'block' : 'none', textAlign: 'center' }}>
                     <CircularProgress style={{ width: '80px', height: '82px', color: '#f44336' }} />
                 </div>
-            </Container >
+            </Container>
         </div >
     )
 }

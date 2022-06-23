@@ -305,9 +305,9 @@ export default function Ytvideo() {
             </Dialog>
 
             <Helmet>
-                <title>Youtube video downloader - Online Youtube Video Downloader | mathcalc</title>
+                <title>Advanced Youtube video downloader - Online Youtube Video Downloader | mathcalc</title>
                 <meta name="description" content="Convert,preview and download Youtube videos to MP3, MP4, 3GP for free with our Youtube video downloader. The downloading is very quick and simple, just wait a few seconds for the file to be ready on your device." />
-                <meta name="keywords" content="youtube, convert video, mp4, mp3, webm, varius quality,medium, low, high quality,youtube video downloader, youtube downloader/" />
+                <meta name="keywords" content="advanced, latest,youtube, convert video, mp4, mp3, webm, varius quality,medium, low, high quality,youtube video downloader, youtube downloader/" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
             </Helmet>
             <Box m={3} className={classes.appBar}>
@@ -325,13 +325,13 @@ export default function Ytvideo() {
                     </svg>
                 </Typography>
                 <Typography variant="h5">
-                    &nbsp; Online youtube video downloader
+                    &nbsp; Advanced Online youtube video downloader
                 </Typography>
             </Box>
             <Divider />
             <Box m={2} className={classes.converter}>
                 <Typography id='convert' variant="h4" className="title is-4">Youtube Downloader</Typography>
-                <Typography variant="subtitle1">Convert, preview and download Youtube videos in MP3, MP4 for free</Typography>
+                <Typography variant="subtitle1">Convert, preview and download Youtube videos in all formats like MP3, MP4 for free</Typography>
             </Box>
             {loading ?
                 <Box p={3} className={classes.divConvertor}>
